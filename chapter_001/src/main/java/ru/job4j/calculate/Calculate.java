@@ -1,4 +1,4 @@
-package main.java.ru.job4j.calculate;
+package ru.job4j.calculate;
 
 /**
 * класс Calculate
@@ -6,7 +6,7 @@ package main.java.ru.job4j.calculate;
 public class Calculate {   
 	/**
 	* main method
-	* @param args
+	* @param args Массив строковых данных
 	*/
    public static void main(String[] args) {
       System.out.println("Hello, Job4j.");
