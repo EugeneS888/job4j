@@ -3,7 +3,7 @@ package ru.job4j.calculate;
 /**
  * Описывает использование авто.
  *
- * @autor Не я
+ * @author Eugene
  */
 public class CarUsage {
     /**
