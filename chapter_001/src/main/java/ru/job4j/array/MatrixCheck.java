@@ -7,11 +7,13 @@ public class MatrixCheck {
         boolean diagonal2 = true;
         for (int i = 0; i < data.length; i++) {
             if (i + 1 < data.length) {
-                if (data[i][i] != data[i + 1][i + 1] && diagonal1) {
+                if (data[i][i] != data[i + 1][i + 1]) {
                     diagonal1 = false;
+                    break;
                 }
-                if (data[i][data.length - 1 - i] != data[i + 1][data.length - i - 1 - 1] && diagonal2) {
+                if (data[i][data.length - 1 - i] != data[i + 1][data.length - i - 1 - 1]) {
                     diagonal2 = false;
+                    break;
                 }
             }
         }
