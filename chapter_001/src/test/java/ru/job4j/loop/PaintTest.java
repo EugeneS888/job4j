@@ -46,6 +46,7 @@ public class PaintTest {
                 )
         );
     }
+
     @Test
     public void whenPyramid4() {
         Paint paint = new Paint();
