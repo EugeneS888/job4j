@@ -72,33 +72,28 @@ public class Logic {
         boolean horizontal = false;
         boolean vertikal = false;
         for (int i = 0; i < table.length; i++) {
+            if (table[i][i] == 1) {
+                horizontal = true;
+                vertikal = true;
+                for (int j = 1; j < table.length; j++) {
+                    //Проверка совпадений по горизонтали
+                    if (table[i][j - 1] == 0 && horizontal) {
+                        horizontal = false;
+                    }
+                    //Проверка совпадений по вертикали
+                    if (table[j - 1][i] == 0 && vertikal) {
+                        vertikal = false;
+                    }
+                    //Чтобы не гонять цикл прерываем при 0
+                    if (!horizontal && !vertikal) {
+                        break;
+                    }
+                }
+            }
             if (horizontal || vertikal) {
                 result = true;
                 break;
             }
-            //Проверка совпадений по горизонтали
-            for (int j = 1; j < table.length; j++) {
-                if (table[i][j - 1] != table[i][j] && table[i][j] == 1) {
-                    break;
-                }
-                if (j == table.length - 1 && table[i][j] == 1) {
-                    horizontal = true;
-                }
-            }
-
-            //Проверка совпадений по вертикали
-            for (int j = 1; j < table.length; j++) {
-                if (table[j - 1][i] != table[j][i] && table[j][i] == 1) {
-                    break;
-                }
-                if (j == table.length - 1 && table[j][i] == 1) {
-                    vertikal = true;
-                }
-            }
-
-        }
-        if (horizontal || vertikal) {
-            result = true;
         }
         return result;
     }
