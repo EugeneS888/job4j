@@ -31,4 +31,12 @@ public class PointTest {
         Point second = new Point(2, 2);
         second.info();
     }
+
+    @Test
+    public void when3PointsThenTen() {
+        Point first = new Point(0, 0, 0);
+        Point second = new Point(5, 10, 10);
+        double result = first.distance3d(second);
+        assertThat(result, is(15D));
+    }
 }
