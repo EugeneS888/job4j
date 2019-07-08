@@ -67,7 +67,7 @@ public class Tracker {
 
     public Item[] findAll() {
         Item[] result = new Item[this.position];
-        for (int i = 0; i <= this.position; i++) {
+        for (int i = 0; i < this.position; i++) {
             result[i] = this.items[i];
         }
         return result;
@@ -89,9 +89,16 @@ public class Tracker {
         boolean result = false;
         for (int i = 0; i < items.length; i++) {
             if (items[i].getId().equals(id)) {
-                System.arraycopy(items, i + 1, items, i, items.length - 1);
+                System.arraycopy(items, i + 1, items, i, items.length - i - 1);
+                System.out.println("items[" + i + "] :" + items[i]);
+                System.out.println("items[" + (i + 1) + "] :" + items[i + 1]);
+                System.out.println("items[" + (i + 2) + "] :" + items[i + 2]);
+                System.out.println("items[" + (i + 3) + "] :" + items[i + 3]);
+                System.out.println("items[" + (i + 4) + "] :" + items[i + 4]);
+                System.out.println("items[" + (i + 5) + "] :" + items[i + 5]);
                 if (!items[i].getId().equals(id)) {
                     result = true;
+                    this.position--;
                 }
                 break;
             }
