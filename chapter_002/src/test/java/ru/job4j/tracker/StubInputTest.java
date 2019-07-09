@@ -1,5 +1,6 @@
 package ru.job4j.tracker;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -13,7 +14,12 @@ public class StubInputTest {
 
     @Before
     public void loadOutput() {
-        System.out.println("execute before method");
+        System.out.println("before method");
+    }
+
+    @After
+    public void backOutput() {
+        System.out.println("after method");
     }
 
     @Test
@@ -22,6 +28,19 @@ public class StubInputTest {
         Input input = new StubInput(new String[]{"0", "test name", "desc", "6"});   //создаём StubInput с последовательностью действий
         new StartUI(input, tracker).init();     //   создаём StartUI и вызываем метод init()
         assertThat(tracker.findAll()[0].getName(), is("test name")); // проверяем, что нулевой элемент массива в трекере содержит имя, введённое при эмуляции.
+    }
+
+    @Test
+    public void whenShowAllItemThenTrackerHasPrintValues() {
+        Tracker tracker = new Tracker();
+        //Напрямую добавляем заявку
+        Item item = tracker.add(new Item("test ShowAll", "desc"));
+        //создаём StubInput с последовательностью действий(производим замену заявки)
+        Input input = new StubInput(new String[]{"1", "6"});
+        // создаём StartUI и вызываем метод init()
+        new StartUI(input, tracker).init();
+        // проверяем, что нулевой элемент массива в трекере содержит имя, введённое при эмуляции.
+        assertThat(tracker.findAll(), arrayContainingInAnyOrder(item));
     }
 
     @Test
