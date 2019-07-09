@@ -92,7 +92,7 @@ public class Tracker {
         for (int i = 0; i < this.position; i++) {
             if (items[i].getId().equals(id)) {
                 System.arraycopy(items, i + 1, items, i, items.length - i - 1);
-                if (!items[i].getId().equals(id)) {
+                if (items[i] == null || !items[i].getId().equals(id)) {
                     result = true;
                     this.position--;
                 }
