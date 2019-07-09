@@ -42,8 +42,11 @@ public class PaintTest {
                 is(
                         new StringBuilder()
                                 .append("++++")
-                                .append("+     +")
-                                .append("+     +")
+                                .append(System.lineSeparator())
+                                .append("+  +")
+                                .append(System.lineSeparator())
+                                .append("+  +")
+                                .append(System.lineSeparator())
                                 .append("++++")
                                 .append(System.lineSeparator())
                                 .toString()
@@ -57,9 +60,7 @@ public class PaintTest {
         assertThat(
                 this.out.toString(),
                 is(
-                        new StringJoiner(
-                                System.lineSeparator(), "",
-                                System.lineSeparator())
+                        new StringJoiner(System.lineSeparator(), "", System.lineSeparator())
                                 .add("  ^  ")
                                 .add(" ^ ^ ")
                                 .add("^^^^^")
