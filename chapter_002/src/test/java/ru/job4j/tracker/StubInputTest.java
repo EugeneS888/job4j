@@ -6,6 +6,7 @@ import org.junit.Test;
 import java.io.PrintStream;
 
 import static org.hamcrest.Matchers.is;
+import static org.hamcrest.collection.IsArrayContainingInAnyOrder.arrayContainingInAnyOrder;
 import static org.junit.Assert.assertThat;
 
 public class StubInputTest {
@@ -28,14 +29,15 @@ public class StubInputTest {
         Tracker tracker = new Tracker();
         //Напрямую добавляем заявку
         Item item = tracker.add(new Item("test findByName", "desc"));
-        tracker.add(new Item("test findByName", "desc2"));
+        //tracker.add(new Item("test findByName", "desc2"));
         tracker.add(new Item("test name2", "desc2"));
         //создаём StubInput с последовательностью действий(производим замену заявки)
         Input input = new StubInput(new String[]{"5", item.getName(), "6"});
         // создаём StartUI и вызываем метод init()
         new StartUI(input, tracker).init();
         // проверяем, что нулевой элемент массива в трекере содержит имя, введённое при эмуляции.
-        assertThat(tracker.findByName(item.getName()).length, is(2));
+        //assertThat(tracker.findByName(item.getName()), is(2));
+        assertThat(tracker.findByName(item.getName()), arrayContainingInAnyOrder(item));
     }
 
     @Test
