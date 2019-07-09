@@ -83,8 +83,12 @@ public class StartUI {
         System.out.println("------------ Найти заявку по id --------------");
         String id = this.input.ask("Введите id заявки :");
         Item res = this.tracker.findById(id);
-        System.out.println(res.getName() + " ; описание: " + res.getDecs() + "; id: " + res.getId());
-        System.out.println("------------ Заявка с Id : " + id + " показана -----------");
+        if (res != null) {
+            System.out.println(res.getName() + " ; описание: " + res.getDecs() + "; id: " + res.getId());
+            System.out.println("------------ Заявка с id : " + id + " показана -----------");
+        } else {
+            System.out.println("Заявки с id : " + id + " не существует! ");
+        }
     }
 
     private void findItemByName() {
@@ -96,22 +100,36 @@ public class StartUI {
                 System.out.println(item.getName() + " ; описание: " + item.getDecs() + "; id: " + item.getId());
             }
         }
-        System.out.println("------------ Заявки с Именем : " + name + " показаны -----------");
+        if (items.length > 0) {
+            System.out.println("Заявки с Именем : " + name + " показаны ");
+        } else {
+            System.out.println("Заявки с Именем : " + name + " не найдены! ");
+        }
     }
 
     private void deleteItem() {
         System.out.println("------------ Удалить заявку --------------");
         String id = this.input.ask("Введите id заявки :");
-        this.tracker.delete(id);
-        System.out.println("------------ Заявка с Id : " + id + " удалена -----------");
+        boolean res = this.tracker.delete(id);
+        if (res) {
+            System.out.println("Заявка с Id : " + id + " удалена ");
+        } else {
+            System.out.println(" Заявка с Id : " + id + " не удалена! ");
+        }
     }
 
     private void editItem() {
         System.out.println("------------ Редактировать заявку --------------");
-        String id = this.input.ask("Введите id заявки :");
+        String id = this.input.ask("Введите id заявки которую нужно изменить :");
+        String name = this.input.ask("Введите новое имя заявки :");
         String desc = this.input.ask("Введите новое описание заявки :");
-        this.tracker.findById(id).setDecs(desc);
-        System.out.println("------------ Заявка с Id : " + id + " отредактирована -----------");
+        Item item = new Item(name, desc);
+        boolean res = this.tracker.replace(id, item);
+        if (res) {
+            System.out.println("------------ Заявка с Id : " + id + " отредактирована -----------");
+        } else {
+            System.out.println("Заявки с id : " + id + " не существует! ");
+        }
     }
 
     public void showAllItems() {
