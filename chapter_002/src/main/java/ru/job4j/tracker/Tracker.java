@@ -41,9 +41,9 @@ public class Tracker {
 
     public Item findById(String id) {
         Item result = null;
-        for (Item item : items) {
-            if (item != null && item.getId().equals(id)) {
-                result = item;
+        for (int i = 0; i <= this.position; i++) {
+            if (items[i] != null && items[i].getId().equals(id)) {
+                result = items[i];
                 break;
             }
         }
@@ -52,21 +52,22 @@ public class Tracker {
 
     public Item[] findByName(String key) {
         Item[] result = new Item[this.position];
-        int i = 0;
-        for (Item item : items) {
-            if (item != null && item.getName().equals(key)) {
-                result[i] = item;
-                i++;
+        int j = 0;
+        for (int i = 0; i <= this.position; i++) {
+            if (items[i] != null && items[i].getName().equals(key)) {
+                result[i] = items[i];
+                j++;
             }
         }
         //Arrays.copyOf(luckyNumbers, luckyNumbers.length);
-        Item[] res = new Item[i];
-        System.arraycopy(result, 0, res, 0, i);
+        Item[] res = new Item[j];
+        System.arraycopy(result, 0, res, 0, j);
         return res;
     }
 
     public Item[] findAll() {
         Item[] result = new Item[this.position];
+        //System.arraycopy(this.items, 0, result, 0, this.position);//Этот же результат что и цикл
         for (int i = 0; i < this.position; i++) {
             result[i] = this.items[i];
         }
@@ -75,9 +76,10 @@ public class Tracker {
 
     public boolean replace(String id, Item item) {
         boolean result = true;
-        for (int i = 0; i < items.length; i++) {
+        for (int i = 0; i <= this.position; i++) {
             if (items[i].getId().equals(id)) {
                 items[i] = item;
+                items[i].setId(this.generateId());
                 result = true;
                 break;
             }
@@ -87,15 +89,9 @@ public class Tracker {
 
     public boolean delete(String id) {
         boolean result = false;
-        for (int i = 0; i < items.length; i++) {
+        for (int i = 0; i <= this.position; i++) {
             if (items[i].getId().equals(id)) {
                 System.arraycopy(items, i + 1, items, i, items.length - i - 1);
-                System.out.println("items[" + i + "] :" + items[i]);
-                System.out.println("items[" + (i + 1) + "] :" + items[i + 1]);
-                System.out.println("items[" + (i + 2) + "] :" + items[i + 2]);
-                System.out.println("items[" + (i + 3) + "] :" + items[i + 3]);
-                System.out.println("items[" + (i + 4) + "] :" + items[i + 4]);
-                System.out.println("items[" + (i + 5) + "] :" + items[i + 5]);
                 if (!items[i].getId().equals(id)) {
                     result = true;
                     this.position--;
