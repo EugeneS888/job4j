@@ -13,6 +13,21 @@ import static org.hamcrest.collection.IsArrayContainingInAnyOrder.arrayContainin
 import static org.junit.Assert.assertThat;
 
 public class StubInputTest {
+    private final String menu = "Меню."
+            + System.lineSeparator()
+            + "0. Add new Item"
+            + System.lineSeparator()
+            + "1. Show all items"
+            + System.lineSeparator()
+            + "2. Edit item"
+            + System.lineSeparator()
+            + "3. Delete item"
+            + System.lineSeparator()
+            + "4. Find item by Id"
+            + System.lineSeparator()
+            + "5. Find items by name"
+            + System.lineSeparator()
+            + "6. Exit Program";
 
     // поле содержит дефолтный вывод в консоль.
     private final PrintStream stdout = System.out;
@@ -36,7 +51,22 @@ public class StubInputTest {
         Tracker tracker = new Tracker();
         Input input = new StubInput(new String[]{"0", "test name", "desc", "6"});   //создаём StubInput с последовательностью действий
         new StartUI(input, tracker).init();     //   создаём StartUI и вызываем метод init()
-        assertThat(tracker.findAll()[0].getName(), is("test name")); // проверяем, что нулевой элемент массива в трекере содержит имя, введённое при эмуляции.
+        //assertThat(tracker.findAll()[0].getName(), is("test name")); // проверяем, что нулевой элемент массива в трекере содержит имя, введённое при эмуляции.
+        assertThat(
+                this.out.toString(),
+                is(
+                        new StringBuilder()
+                                .append(this.menu)
+                                .append(System.lineSeparator())
+                                .append("------------ Добавление новой заявки --------------")
+                                .append(System.lineSeparator())
+                                .append("------------ Новая заявка с getId : ").append(tracker.findByName("test name")[0].getId()).append("-----------")
+                                .append(System.lineSeparator())
+                                .append(this.menu)
+                                .append(System.lineSeparator())
+                                .toString()
+                )
+        );
     }
 
     @Test
@@ -53,21 +83,7 @@ public class StubInputTest {
                 this.out.toString(),
                 is(
                         new StringBuilder()
-                                .append("Меню.")
-                                .append(System.lineSeparator())
-                                .append("0. Add new Item")
-                                .append(System.lineSeparator())
-                                .append("1. Show all items")
-                                .append(System.lineSeparator())
-                                .append("2. Edit item")
-                                .append(System.lineSeparator())
-                                .append("3. Delete item")
-                                .append(System.lineSeparator())
-                                .append("4. Find item by Id")
-                                .append(System.lineSeparator())
-                                .append("5. Find items by name")
-                                .append(System.lineSeparator())
-                                .append("6. Exit Program")
+                                .append(this.menu)
                                 .append(System.lineSeparator())
                                 .append("------------ Список всех заявок --------------")
                                 .append(System.lineSeparator())
@@ -75,21 +91,7 @@ public class StubInputTest {
                                 .append(System.lineSeparator())
                                 .append("------------ Список закончен --------------")
                                 .append(System.lineSeparator())
-                                .append("Меню.")
-                                .append(System.lineSeparator())
-                                .append("0. Add new Item")
-                                .append(System.lineSeparator())
-                                .append("1. Show all items")
-                                .append(System.lineSeparator())
-                                .append("2. Edit item")
-                                .append(System.lineSeparator())
-                                .append("3. Delete item")
-                                .append(System.lineSeparator())
-                                .append("4. Find item by Id")
-                                .append(System.lineSeparator())
-                                .append("5. Find items by name")
-                                .append(System.lineSeparator())
-                                .append("6. Exit Program")
+                                .append(this.menu)
                                 .append(System.lineSeparator())
                                 .toString()
                 )
@@ -109,21 +111,59 @@ public class StubInputTest {
         new StartUI(input, tracker).init();
         // проверяем, что нулевой элемент массива в трекере содержит имя, введённое при эмуляции.
         //assertThat(tracker.findByName(item.getName()), is(2));
-        assertThat(tracker.findByName(item.getName()), arrayContainingInAnyOrder(item));
+        //assertThat(tracker.findByName(item.getName()), arrayContainingInAnyOrder(item));
+        assertThat(
+                this.out.toString(),
+                is(
+                        new StringBuilder()
+                                .append(this.menu)
+                                .append(System.lineSeparator())
+                                .append("------------ Найти заявку по Имени --------------")
+                                .append(System.lineSeparator())
+                                .append(item.getName()).append(" ; описание: ").append(item.getDecs()).append("; id: ").append(item.getId())
+                                .append(System.lineSeparator())
+                                .append("Заявки с Именем : ").append(item.getName()).append(" показаны ")
+                                .append(System.lineSeparator())
+                                .append(this.menu)
+                                .append(System.lineSeparator())
+                                .toString()
+                )
+        );
     }
 
     @Test
     public void whenFindByIdThenTrackerHasFoundValue() {
         Tracker tracker = new Tracker();
         //Напрямую добавляем заявку
-        Item item = tracker.add(new Item("test name", "desc"));
-        Item item2 = tracker.add(new Item("test name2", "desc"));
+        Item item = tracker.add(new Item("test id", "desc"));
+        Item item2 = tracker.add(new Item("test id2", "desc"));
         //создаём StubInput с последовательностью действий(производим замену заявки)
         Input input = new StubInput(new String[]{"4", item.getId(), "test findById", "нашли заявку по id", "6"});
         // создаём StartUI и вызываем метод init()
         new StartUI(input, tracker).init();
         // проверяем, что нулевой элемент массива в трекере содержит имя, введённое при эмуляции.
-        assertThat(tracker.findById(item.getId()).getName(), is(item.getName()));
+        //assertThat(tracker.findById(item.getId()).getId(), is(item.getId()));
+        assertThat(
+                this.out.toString(),
+                is(
+                        new StringBuilder()
+                                .append(this.menu)
+                                .append(System.lineSeparator())
+                                .append("------------ Найти заявку по id --------------")
+                                .append(System.lineSeparator())
+                                .append(item.getName()).append(" ; описание: ").append(item.getDecs()).append("; id: ").append(item.getId())
+                                .append(System.lineSeparator())
+                                .append("------------ Заявка с id : ").append(item.getId()).append(" показана -----------")
+                                .append(System.lineSeparator())
+                                .append(this.menu)
+                                .append(System.lineSeparator())
+                                .append(this.menu)
+                                .append(System.lineSeparator())
+                                .append(this.menu)
+                                .append(System.lineSeparator())
+                                .toString()
+                )
+        );
     }
 
     @Test
@@ -136,7 +176,22 @@ public class StubInputTest {
         // создаём StartUI и вызываем метод init()
         new StartUI(input, tracker).init();
         // проверяем, что нулевой элемент массива в трекере содержит имя, введённое при эмуляции.
-        assertThat(tracker.findById(item.getId()).getName(), is("test replace"));
+        //assertThat(tracker.findById(item.getId()).getName(), is("test replace"));
+        assertThat(
+                this.out.toString(),
+                is(
+                        new StringBuilder()
+                                .append(this.menu)
+                                .append(System.lineSeparator())
+                                .append("------------ Редактировать заявку --------------")
+                                .append(System.lineSeparator())
+                                .append("------------ Заявка с Id : ").append(item.getId()).append(" отредактирована -----------")
+                                .append(System.lineSeparator())
+                                .append(this.menu)
+                                .append(System.lineSeparator())
+                                .toString()
+                )
+        );
     }
 
     @Test
@@ -150,6 +205,25 @@ public class StubInputTest {
         new StartUI(input, tracker).init();
         String t = null;
         // проверяем, что нулевой элемент массива в трекере содержит имя, введённое при эмуляции.
-        assertThat(tracker.findById(item.getId()), is(t));
+        //assertThat(tracker.findById(item.getId()), is(t));
+        assertThat(
+                this.out.toString(),
+                is(
+                        new StringBuilder()
+                                .append(this.menu)
+                                .append(System.lineSeparator())
+                                .append("------------ Удалить заявку --------------")
+                                .append(System.lineSeparator())
+                                .append("Заявка с Id : ").append(item.getId()).append(" удалена ")
+                                .append(System.lineSeparator())
+                                .append(this.menu)
+                                .append(System.lineSeparator())
+                                .append(this.menu)
+                                .append(System.lineSeparator())
+                                .append(this.menu)
+                                .append(System.lineSeparator())
+                                .toString()
+                )
+        );
     }
 }
