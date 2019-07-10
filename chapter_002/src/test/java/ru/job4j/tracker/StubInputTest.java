@@ -1,9 +1,11 @@
 package ru.job4j.tracker;
 
+import org.hamcrest.core.Is;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 
 import static org.hamcrest.Matchers.is;
@@ -12,14 +14,21 @@ import static org.junit.Assert.assertThat;
 
 public class StubInputTest {
 
+    // поле содержит дефолтный вывод в консоль.
+    private final PrintStream stdout = System.out;
+    // буфер для результата.
+    private final ByteArrayOutputStream out = new ByteArrayOutputStream();
+
     @Before
     public void loadOutput() {
-        System.out.println("before method");
+        System.out.println("execute before method");
+        System.setOut(new PrintStream(this.out));
     }
 
     @After
     public void backOutput() {
-        System.out.println("after method");
+        System.setOut(this.stdout);
+        System.out.println("execute after method");
     }
 
     @Test
@@ -40,7 +49,51 @@ public class StubInputTest {
         // создаём StartUI и вызываем метод init()
         new StartUI(input, tracker).init();
         // проверяем, что нулевой элемент массива в трекере содержит имя, введённое при эмуляции.
-        assertThat(tracker.findAll(), arrayContainingInAnyOrder(item));
+        assertThat(
+                this.out.toString(),
+                is(
+                        new StringBuilder()
+                                .append("Меню.")
+                                .append(System.lineSeparator())
+                                .append("0. Add new Item")
+                                .append(System.lineSeparator())
+                                .append("1. Show all items")
+                                .append(System.lineSeparator())
+                                .append("2. Edit item")
+                                .append(System.lineSeparator())
+                                .append("3. Delete item")
+                                .append(System.lineSeparator())
+                                .append("4. Find item by Id")
+                                .append(System.lineSeparator())
+                                .append("5. Find items by name")
+                                .append(System.lineSeparator())
+                                .append("6. Exit Program")
+                                .append(System.lineSeparator())
+                                .append("------------ Список всех заявок --------------")
+                                .append(System.lineSeparator())
+                                .append("test ShowAll ; описание: desc; id: ").append(item.getId())
+                                .append(System.lineSeparator())
+                                .append("------------ Список закончен --------------")
+                                .append(System.lineSeparator())
+                                .append("Меню.")
+                                .append(System.lineSeparator())
+                                .append("0. Add new Item")
+                                .append(System.lineSeparator())
+                                .append("1. Show all items")
+                                .append(System.lineSeparator())
+                                .append("2. Edit item")
+                                .append(System.lineSeparator())
+                                .append("3. Delete item")
+                                .append(System.lineSeparator())
+                                .append("4. Find item by Id")
+                                .append(System.lineSeparator())
+                                .append("5. Find items by name")
+                                .append(System.lineSeparator())
+                                .append("6. Exit Program")
+                                .append(System.lineSeparator())
+                                .toString()
+                )
+        );
     }
 
     @Test
