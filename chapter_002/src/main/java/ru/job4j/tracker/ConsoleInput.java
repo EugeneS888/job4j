@@ -12,7 +12,6 @@ public class ConsoleInput implements Input {
 
     public int ask(String question, int[] range) {
         int key = Integer.valueOf(this.ask(question));
-        System.out.println(key);
         boolean exist = false;
         for (int value : range) {
             if (value == key) {
