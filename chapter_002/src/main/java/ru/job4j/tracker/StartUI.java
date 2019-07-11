@@ -1,5 +1,8 @@
 package ru.job4j.tracker;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * @version $Id$
  * @since 0.1
@@ -28,6 +31,7 @@ public class StartUI {
      * Хранилище заявок.
      */
     private final Tracker tracker;
+    private int[] ranges = new int[]{0, 1, 2, 3, 4, 5};
 
     /**
      * Конструтор инициализирующий поля.
@@ -45,11 +49,25 @@ public class StartUI {
      */
     public void init() {
         MenuTracker menu = new MenuTracker(this.input, this.tracker);
+        //List<Integer> range = new ArrayList<>();
+        menu.fillActions();
+        int[] range = new int[menu.getActionsLentgh()];
+        for (int i = 0; i < menu.getActionsLentgh(); i++) {
+            //range.add(i);
+            range[i] = i;
+        }
+        do {
+            menu.show();
+            menu.select(input.ask("select:", range));
+        } while (!"y".equals(this.input.ask("Exit?(y): ")));
+
+        /*MenuTracker menu = new MenuTracker(this.input, this.tracker);
         menu.fillActions();
         do {
             menu.show();
             menu.select(Integer.valueOf(input.ask("select:")));
-        } while (!"y".equals(this.input.ask("Exit?(y): ")));
+        } while (!"y".equals(this.input.ask("Exit?(y): ")));*/
+
         /*boolean exit = false;
         while (!exit) {
             this.showMenu();
@@ -167,6 +185,6 @@ public class StartUI {
      * @param args
      */
     public static void main(String[] args) {
-        new StartUI(new ConsoleInput(), new Tracker()).init();
+        new StartUI(new ValidateInput(), new Tracker()).init();
     }
 }
