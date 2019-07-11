@@ -1,6 +1,6 @@
 package ru.job4j.tracker;
 
-public class ValidateInput extends ConsoleInput {
+public class ValidateInput implements Input {
     private final Input input;
 
     public ValidateInput(final Input input) {
@@ -17,8 +17,19 @@ public class ValidateInput extends ConsoleInput {
         int value = -1;
         do {
             try {
-                value = super.ask(question, range);
+                value = this.input.ask(question, range);
+                boolean exist = false;
+                for (int item : range) {
+                    if (item == value) {
+                        exist = true;
+                        break;
+                    }
+                }
+                if (!exist) {
+                    throw new MenuOutException("Выход за пределы range");
+                }
                 invalid = false;
+
             } catch (MenuOutException moe) {
                 //moe.printStackTrace();
                 System.out.println("Необходимо выбрать значение из диапазона меню");
