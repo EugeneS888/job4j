@@ -31,7 +31,6 @@ public class StartUI {
      * Хранилище заявок.
      */
     private final Tracker tracker;
-    private int[] ranges = new int[]{0, 1, 2, 3, 4, 5};
 
     /**
      * Конструтор инициализирующий поля.

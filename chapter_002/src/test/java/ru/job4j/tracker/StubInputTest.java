@@ -13,21 +13,17 @@ import static org.hamcrest.collection.IsArrayContainingInAnyOrder.arrayContainin
 import static org.junit.Assert.assertThat;
 
 public class StubInputTest {
-    private final String menu = "Меню."
+    private final String menu = "0. Add new Item."
             + System.lineSeparator()
-            + "0. Add new Item"
+            + "1. SHOW ALL Items."
             + System.lineSeparator()
-            + "1. Show all items"
+            + "2. Update Item."
             + System.lineSeparator()
-            + "2. Edit item"
+            + "3. DELETE Item."
             + System.lineSeparator()
-            + "3. Delete item"
+            + "4. FIND BY ID Item."
             + System.lineSeparator()
-            + "4. Find item by Id"
-            + System.lineSeparator()
-            + "5. Find items by name"
-            + System.lineSeparator()
-            + "6. Exit Program";
+            + "5. FIND BY NAME Items.";
 
     // поле содержит дефолтный вывод в консоль.
     private final PrintStream stdout = System.out;
@@ -49,7 +45,7 @@ public class StubInputTest {
     @Test
     public void whenUserAddItemThenTrackerHasNewItemWithSameName() {
         Tracker tracker = new Tracker();
-        Input input = new StubInput(new String[]{"0", "test name", "desc", "6"});   //создаём StubInput с последовательностью действий
+        Input input = new StubInput(new String[]{"0", "test name", "desc", "y"});   //создаём StubInput с последовательностью действий
         new StartUI(input, tracker).init();     //   создаём StartUI и вызываем метод init()
         //assertThat(tracker.findAll()[0].getName(), is("test name")); // проверяем, что нулевой элемент массива в трекере содержит имя, введённое при эмуляции.
         assertThat(
@@ -62,8 +58,6 @@ public class StubInputTest {
                                 .append(System.lineSeparator())
                                 .append("------------ Новая заявка с getId : ").append(tracker.findByName("test name")[0].getId()).append("-----------")
                                 .append(System.lineSeparator())
-                                .append(this.menu)
-                                .append(System.lineSeparator())
                                 .toString()
                 )
         );
@@ -75,7 +69,7 @@ public class StubInputTest {
         //Напрямую добавляем заявку
         Item item = tracker.add(new Item("test ShowAll", "desc"));
         //создаём StubInput с последовательностью действий(производим замену заявки)
-        Input input = new StubInput(new String[]{"1", "6"});
+        Input input = new StubInput(new String[]{"1", "y"});
         // создаём StartUI и вызываем метод init()
         new StartUI(input, tracker).init();
         // проверяем, что нулевой элемент массива в трекере содержит имя, введённое при эмуляции.
@@ -91,8 +85,6 @@ public class StubInputTest {
                                 .append(System.lineSeparator())
                                 .append("------------ Список закончен --------------")
                                 .append(System.lineSeparator())
-                                .append(this.menu)
-                                .append(System.lineSeparator())
                                 .toString()
                 )
         );
@@ -106,7 +98,7 @@ public class StubInputTest {
         //tracker.add(new Item("test findByName", "desc2"));
         tracker.add(new Item("test name2", "desc2"));
         //создаём StubInput с последовательностью действий(производим замену заявки)
-        Input input = new StubInput(new String[]{"5", item.getName(), "6"});
+        Input input = new StubInput(new String[]{"5", item.getName(), "y"});
         // создаём StartUI и вызываем метод init()
         new StartUI(input, tracker).init();
         // проверяем, что нулевой элемент массива в трекере содержит имя, введённое при эмуляции.
@@ -124,8 +116,6 @@ public class StubInputTest {
                                 .append(System.lineSeparator())
                                 .append("Заявки с Именем : ").append(item.getName()).append(" показаны ")
                                 .append(System.lineSeparator())
-                                .append(this.menu)
-                                .append(System.lineSeparator())
                                 .toString()
                 )
         );
@@ -138,7 +128,7 @@ public class StubInputTest {
         Item item = tracker.add(new Item("test id", "desc"));
         Item item2 = tracker.add(new Item("test id2", "desc"));
         //создаём StubInput с последовательностью действий(производим замену заявки)
-        Input input = new StubInput(new String[]{"4", item.getId(), "test findById", "нашли заявку по id", "6"});
+        Input input = new StubInput(new String[]{"4", item.getId(), "y"});
         // создаём StartUI и вызываем метод init()
         new StartUI(input, tracker).init();
         // проверяем, что нулевой элемент массива в трекере содержит имя, введённое при эмуляции.
@@ -155,12 +145,6 @@ public class StubInputTest {
                                 .append(System.lineSeparator())
                                 .append("------------ Заявка с id : ").append(item.getId()).append(" показана -----------")
                                 .append(System.lineSeparator())
-                                .append(this.menu)
-                                .append(System.lineSeparator())
-                                .append(this.menu)
-                                .append(System.lineSeparator())
-                                .append(this.menu)
-                                .append(System.lineSeparator())
                                 .toString()
                 )
         );
@@ -172,7 +156,7 @@ public class StubInputTest {
         //Напрямую добавляем заявку
         Item item = tracker.add(new Item("test name", "desc"));
         //создаём StubInput с последовательностью действий(производим замену заявки)
-        Input input = new StubInput(new String[]{"2", item.getId(), "test replace", "заменили заявку", "6"});
+        Input input = new StubInput(new String[]{"2", item.getId(), "test replace", "заменили заявку", "y"});
         // создаём StartUI и вызываем метод init()
         new StartUI(input, tracker).init();
         // проверяем, что нулевой элемент массива в трекере содержит имя, введённое при эмуляции.
@@ -187,8 +171,6 @@ public class StubInputTest {
                                 .append(System.lineSeparator())
                                 .append("------------ Заявка с Id : ").append(item.getId()).append(" отредактирована -----------")
                                 .append(System.lineSeparator())
-                                .append(this.menu)
-                                .append(System.lineSeparator())
                                 .toString()
                 )
         );
@@ -200,7 +182,7 @@ public class StubInputTest {
         //Напрямую добавляем заявку
         Item item = tracker.add(new Item("test name", "desc"));
         //создаём StubInput с последовательностью действий(производим замену заявки)
-        Input input = new StubInput(new String[]{"3", item.getId(), "test delete", "удалили заявку", "6"});
+        Input input = new StubInput(new String[]{"3", item.getId(), "y"});
         // создаём StartUI и вызываем метод init()
         new StartUI(input, tracker).init();
         String t = null;
@@ -215,12 +197,6 @@ public class StubInputTest {
                                 .append("------------ Удалить заявку --------------")
                                 .append(System.lineSeparator())
                                 .append("Заявка с Id : ").append(item.getId()).append(" удалена ")
-                                .append(System.lineSeparator())
-                                .append(this.menu)
-                                .append(System.lineSeparator())
-                                .append(this.menu)
-                                .append(System.lineSeparator())
-                                .append(this.menu)
                                 .append(System.lineSeparator())
                                 .toString()
                 )
