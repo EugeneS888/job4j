@@ -18,18 +18,7 @@ public class ValidateInput implements Input {
         do {
             try {
                 value = this.input.ask(question, range);
-                boolean exist = false;
-                for (int item : range) {
-                    if (item == value) {
-                        exist = true;
-                        break;
-                    }
-                }
-                if (!exist) {
-                    throw new MenuOutException("Выход за пределы range");
-                }
                 invalid = false;
-
             } catch (MenuOutException moe) {
                 //moe.printStackTrace();
                 System.out.println("Необходимо выбрать значение из диапазона меню");

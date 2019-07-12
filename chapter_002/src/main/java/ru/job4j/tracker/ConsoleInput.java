@@ -10,8 +10,7 @@ public class ConsoleInput implements Input {
         return scanner.nextLine();
     }
 
-    public int ask(String question, int[] range) {
-        int key = Integer.valueOf(this.ask(question));
+    public boolean checkRange(int key,int[] range){
         boolean exist = false;
         for (int value : range) {
             if (value == key) {
@@ -19,11 +18,15 @@ public class ConsoleInput implements Input {
                 break;
             }
         }
-        if (exist) {
-            return key;
-        } else {
+        return exist;
+    }
+
+    public int ask(String question, int[] range) {
+        int key = Integer.valueOf(this.ask(question));
+        if (!this.checkRange(key,range)) {
             throw new MenuOutException("Выход за пределы range");
         }
+        return key;
 
     }
 }

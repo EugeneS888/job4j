@@ -35,8 +35,22 @@ public class StubInput implements Input {
         return this.value[this.position++];
     }
 
+    public boolean checkRange(int key,int[] range){
+        boolean exist = false;
+        for (int value : range) {
+            if (value == key) {
+                exist = true;
+                break;
+            }
+        }
+        return exist;
+    }
+
     public int ask(String question, int[] range) {
-        //throw new UnsupportedOperationException("UnsupportedOperation");
-        return Integer.valueOf(this.value[this.position++]);
+        int key= Integer.valueOf(this.value[this.position++]);
+        if (!this.checkRange(key,range)) {
+            throw new MenuOutException("Выход за пределы range");
+        }
+        return key;
     }
 }
