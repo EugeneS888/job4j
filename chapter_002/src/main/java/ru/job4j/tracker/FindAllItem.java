@@ -1,11 +1,8 @@
 package ru.job4j.tracker;
 
-public class FindAllItem implements UserAction {
-    private static final int SHOW_ALL = 1;
-
-    @Override
-    public int key() {
-        return SHOW_ALL;
+public class FindAllItem extends BaseAction {
+    public FindAllItem() {
+        super(1, "SHOW ALL Items.");
     }
 
     @Override
@@ -18,10 +15,5 @@ public class FindAllItem implements UserAction {
             }
         }
         System.out.println("------------ Список закончен --------------");
-    }
-
-    @Override
-    public String info() {
-        return "1. SHOW ALL Items.";
     }
 }

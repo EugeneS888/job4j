@@ -1,11 +1,8 @@
 package ru.job4j.tracker;
 
-public class UpdateItem implements UserAction {
-    private static final int EDIT = 2;
-
-    @Override
-    public int key() {
-        return EDIT;
+public class UpdateItem extends BaseAction {
+    public UpdateItem() {
+        super(2, "Update Item.");
     }
 
     @Override
@@ -21,10 +18,5 @@ public class UpdateItem implements UserAction {
         } else {
             System.out.println("Заявки с id : " + id + " не существует! ");
         }
-    }
-
-    @Override
-    public String info() {
-        return "2. Update Item.";
     }
 }

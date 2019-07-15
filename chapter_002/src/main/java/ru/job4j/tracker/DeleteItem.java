@@ -1,11 +1,8 @@
 package ru.job4j.tracker;
 
-public class DeleteItem implements UserAction {
-    private static final int DELETE = 3;
-
-    @Override
-    public int key() {
-        return DELETE;
+public class DeleteItem extends BaseAction {
+    public DeleteItem() {
+        super(3, "DELETE Item.");
     }
 
     @Override
@@ -18,10 +15,5 @@ public class DeleteItem implements UserAction {
         } else {
             System.out.println(" Заявка с Id : " + id + " не удалена! ");
         }
-    }
-
-    @Override
-    public String info() {
-        return "3. DELETE Item.";
     }
 }

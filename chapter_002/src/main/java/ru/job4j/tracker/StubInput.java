@@ -35,7 +35,7 @@ public class StubInput implements Input {
         return this.value[this.position++];
     }
 
-    public boolean checkRange(int key,int[] range){
+    public boolean checkRange(int key, int[] range) {
         boolean exist = false;
         for (int value : range) {
             if (value == key) {
@@ -47,8 +47,8 @@ public class StubInput implements Input {
     }
 
     public int ask(String question, int[] range) {
-        int key= Integer.valueOf(this.value[this.position++]);
-        if (!this.checkRange(key,range)) {
+        int key = Integer.valueOf(this.value[this.position++]);
+        if (!this.checkRange(key, range)) {
             throw new MenuOutException("Выход за пределы range");
         }
         return key;
