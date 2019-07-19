@@ -1,5 +1,6 @@
 package ru.job4j.chess.firuges.black;
 
+import ru.job4j.chess.ImpossibleMoveException;
 import ru.job4j.chess.firuges.Cell;
 import ru.job4j.chess.firuges.Figure;
 
@@ -23,8 +24,10 @@ public class PawnBlack implements Figure {
     @Override
     public Cell[] way(Cell source, Cell dest) {
         Cell[] steps = new Cell[0];
-        if (source.y == dest.y + 1 && source.x == dest.x) {
+        if (source.y - 1 == dest.y && source.x == dest.x) {
             steps = new Cell[]{dest};
+        } else {
+            throw new ImpossibleMoveException();
         }
         return steps;
     }

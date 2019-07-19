@@ -4,6 +4,7 @@ import javafx.application.Application;
 import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
@@ -60,10 +61,15 @@ public class Chess extends Application {
         );
         rect.setOnMouseReleased(
                 event -> {
-                    if (logic.move(this.findBy(momento.getX(), momento.getY()), this.findBy(event.getX(), event.getY()))) {
+                    String alertContentText = "";
+                    try {
+                        logic.move(this.findBy(momento.getX(), momento.getY()), this.findBy(event.getX(), event.getY()));
                         rect.setX(((int) event.getX() / 40) * 40 + 5);
                         rect.setY(((int) event.getY() / 40) * 40 + 5);
-                    } else {
+                    } catch (OccupiedWayException | ImpossibleMoveException | FigureNotFoundException e) {
+                        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                        alert.setContentText(e.getMessage());
+                        alert.showAndWait();
                         rect.setX(((int) momento.getX() / 40) * 40 + 5);
                         rect.setY(((int) momento.getY() / 40) * 40 + 5);
                     }
@@ -179,8 +185,9 @@ public class Chess extends Application {
 
     /**
      * Стоят ли две точки на одной диагонали.
+     *
      * @param source исходная точка
-     * @param dest конечная точка
+     * @param dest   конечная точка
      * @return boolean
      */
     public static boolean isDiagonal(Cell source, Cell dest) {
@@ -192,7 +199,23 @@ public class Chess extends Application {
     }
 
     /**
+     * Стоят ли 2 точки на одной прямой не диагонали.
+     *
+     * @param source исходная точка
+     * @param dest   конечная точка
+     * @return boolean
+     */
+    public static boolean isLine(Cell source, Cell dest) {
+        boolean res = false;
+        if (dest.x == source.x || dest.y == source.y) {
+            res = true;
+        }
+        return res;
+    }
+
+    /**
      * Возвращает ENUM имя клетки.
+     *
      * @param x координата по горизонтали
      * @param y координата по вертикали
      * @return клетку

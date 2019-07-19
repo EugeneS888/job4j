@@ -43,7 +43,7 @@ public class BishopBlack implements Figure {
                 }
             }
         } else {
-            throw new ImpossibleMoveException("Невозможно передвинуть");
+            throw new ImpossibleMoveException();
         }
         return steps;
     }
