@@ -22,17 +22,6 @@ public class ConvertList2Array {
             i++;
             j = 0;
         }
-        /*
-        for (int i = 0; i < rows; i++) {
-            for (int j = 0; j < cells; j++) {
-                if (count < size) {
-                    array[i][j] = list.get(count);
-                } else {
-                    array[i][j] = 0;
-                }
-                count++;
-            }
-        }*/
         return array;
     }
 }
