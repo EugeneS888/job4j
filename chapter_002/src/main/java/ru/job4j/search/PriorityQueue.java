@@ -15,15 +15,17 @@ public class PriorityQueue {
     public void put(Task task) {
         //TODO добавить вставку в связанный список.
         int count = tasks.size();
+        boolean res = false;
         if (count > 0) {
             for (int i = 0; i < count; i++) {
                 if (tasks.get(i).getPriority() > task.getPriority()) {
                     tasks.set(i, task);
-                    break;
-                } else {
-                    tasks.addLast(task);
+                    res = true;
                     break;
                 }
+            }
+            if (!res) {
+                tasks.addLast(task);
             }
         } else {
             tasks.add(0, task);
