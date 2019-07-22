@@ -9,6 +9,20 @@ public class ConvertList2Array {
         int cells = (int) Math.ceil(res);
         int[][] array = new int[rows][cells];
         int count = 0;
+        int i = 0;
+        int j = 0;
+        for (int[] item : array) {
+            for (int it : item) {
+                if (count < size) {
+                    array[i][j] = list.get(count);
+                }
+                j++;
+                count++;
+            }
+            i++;
+            j = 0;
+        }
+        /*
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < cells; j++) {
                 if (count < size) {
@@ -18,7 +32,7 @@ public class ConvertList2Array {
                 }
                 count++;
             }
-        }
+        }*/
         return array;
     }
 }
