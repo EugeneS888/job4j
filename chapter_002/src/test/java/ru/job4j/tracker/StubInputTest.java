@@ -56,7 +56,7 @@ public class StubInputTest {
                                 .append(System.lineSeparator())
                                 .append("------------ Добавление новой заявки --------------")
                                 .append(System.lineSeparator())
-                                .append("------------ Новая заявка с getId : ").append(tracker.findByName("test name")[0].getId()).append("-----------")
+                                .append("------------ Новая заявка с getId : ").append(tracker.findByName("test name").get(0).getId()).append("-----------")
                                 .append(System.lineSeparator())
                                 .toString()
                 )

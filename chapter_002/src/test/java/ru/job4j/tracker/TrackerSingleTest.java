@@ -6,6 +6,7 @@ import org.junit.Test;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
+import java.util.ArrayList;
 
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.*;
@@ -38,9 +39,9 @@ public class TrackerSingleTest {
         TrackerSingle tracker1 = TrackerSingle.INSTANCE;
         Item next = new Item("test2", "testDescription2", 1234L);
         tracker1.add(next);
-        Item[] result = tracker1.findAll();
-        for (int i = 0; i < result.length; i++) {
-            System.out.println(result[i].getName());
+        ArrayList<Item> result = tracker1.findAll();
+        for (int i = 0; i < result.size(); i++) {
+            System.out.println(result.get(i).getName());
         }
         assertThat(
                 this.out.toString(),
@@ -65,9 +66,9 @@ public class TrackerSingleTest {
         TrackerSingle1 tracker1 = TrackerSingle1.getInstance();
         Item next = new Item("test2", "testDescription2", 1234L);
         tracker1.add(next);
-        Item[] result = tracker1.findAll();
-        for (int i = 0; i < result.length; i++) {
-            System.out.println(result[i].getName());
+        ArrayList<Item> result = tracker1.findAll();
+        for (int i = 0; i < result.size(); i++) {
+            System.out.println(result.get(i).getName());
         }
         assertThat(
                 this.out.toString(),
@@ -92,9 +93,9 @@ public class TrackerSingleTest {
         TrackerSingle2 tracker1 = TrackerSingle2.getInstance();
         Item next = new Item("test2", "testDescription2", 1234L);
         tracker1.add(next);
-        Item[] result = tracker1.findAll();
-        for (int i = 0; i < result.length; i++) {
-            System.out.println(result[i].getName());
+        ArrayList<Item> result = tracker1.findAll();
+        for (int i = 0; i < result.size(); i++) {
+            System.out.println(result.get(i).getName());
         }
         assertThat(
                 this.out.toString(),
@@ -119,9 +120,9 @@ public class TrackerSingleTest {
         TrackerSingle3 tracker1 = TrackerSingle3.getInstance();
         Item next = new Item("test2", "testDescription2", 1234L);
         tracker1.add(next);
-        Item[] result = tracker1.findAll();
-        for (int i = 0; i < result.length; i++) {
-            System.out.println(result[i].getName());
+        ArrayList<Item> result = tracker1.findAll();
+        for (int i = 0; i < result.size(); i++) {
+            System.out.println(result.get(i).getName());
         }
         assertThat(
                 this.out.toString(),
@@ -146,9 +147,9 @@ public class TrackerSingleTest {
         Tracker tracker2 = new Tracker();
         Item next = new Item("test2", "testDescription2", 1234L);
         tracker2.add(next);
-        Item[] result = tracker2.findAll();
-        for (int i = 0; i < result.length; i++) {
-            System.out.println(result[i].getName());
+        ArrayList<Item> result = tracker2.findAll();
+        for (int i = 0; i < result.size(); i++) {
+            System.out.println(result.get(i).getName());
         }
         assertThat(
                 this.out.toString(),
