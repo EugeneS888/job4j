@@ -1,6 +1,7 @@
 package ru.job4j.tracker;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class FindAllItem extends BaseAction {
     public FindAllItem() {
@@ -10,7 +11,7 @@ public class FindAllItem extends BaseAction {
     @Override
     public void execute(Input input, Tracker tracker) {
         System.out.println("------------ Список всех заявок --------------");
-        ArrayList<Item> items = tracker.findAll();
+        List<Item> items = tracker.findAll();
         for (Item item : items) {
             if (item != null) {
                 System.out.println(item.getName() + " ; описание: " + item.getDecs() + "; id: " + item.getId());
