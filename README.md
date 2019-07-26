@@ -1,10 +1,4 @@
+[![Build Status](https://travis-ci.org/EugeneS888/job4j.svg?branch=master)](https://travis-ci.org/EugeneS888/job4j)
+[![codecov](https://codecov.io/gh/EugeneS888/job4j/branch/master/graph/badge.svg)](https://codecov.io/gh/EugeneS888/job4j)
+
 # job4j
-Обучение программированию для Android
-цель достичь к концу лета
-
-Объединение зафиксированных изменений
-
-
-В курсе производилась работа с веткамы git.
-
-ветка task_154819
