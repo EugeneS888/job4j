@@ -16,7 +16,9 @@ public class Validate {
 
     public boolean changeRange(int userInput) {
         boolean res = false;
-        if (userInput % 5 == 0) res = true;
+        if (userInput % 5 == 0) {
+            res = true;
+        }
         if (!res) {
             throw new ru.job4j.hotels.MenuOutException("");
         }
@@ -40,13 +42,14 @@ public class Validate {
 
     public boolean changeRates(String userInput) {
         boolean res = false;
-        String strArr[] = userInput.split(" ");
+        String[] strArr = userInput.split(" ");
         int min = 100;
         if (strArr.length == this.hotels) {
             for (int i = 0; i < strArr.length; i++) {
                 Integer.valueOf(strArr[i]);
-                if (Integer.parseInt(strArr[i]) < 1 || Integer.parseInt(strArr[i]) > 100)
+                if (Integer.parseInt(strArr[i]) < 1 || Integer.parseInt(strArr[i]) > 100) {
                     throw new ru.job4j.hotels.RatesException("");
+                }
                 min = Math.min(min, i + 1);
                 this.numRate.put(Integer.parseInt(strArr[i]), i + 1);
             }

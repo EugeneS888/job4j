@@ -28,3 +28,39 @@ public class Item {
     }
 
 }
+/*
+abstract class Parent {
+
+
+    class Child {}
+    private String getT(){
+        return "D";
+    }
+    public String getT(String st){
+        return "454";
+    }
+
+}
+ class Ne extends Parent{
+
+     private int  getT(int r) {
+         return this.my(r);
+     }
+
+
+     private String getT(){
+        return "GG";
+     }
+     public int my(int g){
+         try {
+             return g;
+         }finally {
+             System.out.print(2);
+         }
+     }
+     public static void main(String[] args) {
+         Child child = new Ne().new Child(); // как тут создать экземпляр Child?
+         Ne pa=new Ne();
+         System.out.println(pa.getT(6)+"==");
+     }
+ }*/

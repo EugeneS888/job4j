@@ -17,8 +17,7 @@ public class Hotels {
             res = validateInput.isTrueNumHotels(input.ask(question));
         } while (!res);
 
-        question = "Введите последовательность из n различных целых положительных чисел a1, a2, ..." +
-                ", an (1 ≤ ai ≤ 100), где ai равно рейтингу i-го отеля:";
+        question = "Введите последовательность из n различных целых положительных чисел a1, a2, ..., an (1 ≤ ai ≤ 100), где ai равно рейтингу i-го отеля:";
         res = false;
         do {
             res = validateInput.isTrueRate(input.ask(question));
