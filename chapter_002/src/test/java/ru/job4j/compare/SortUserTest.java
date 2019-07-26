@@ -91,4 +91,5 @@ public class SortUserTest {
         }
         assertThat(result, is(expect));
     }
+
 }
