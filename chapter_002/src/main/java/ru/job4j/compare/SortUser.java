@@ -4,7 +4,7 @@ import java.util.*;
 
 public class SortUser {
     public Set<User> sort(List<User> list) {
-        Collections.sort(list);
+        //Collections.sort(list);
         return new TreeSet<>(list);
         /*
         Set<User> set = new TreeSet<>();
