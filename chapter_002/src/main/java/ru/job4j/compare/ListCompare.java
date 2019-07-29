@@ -8,19 +8,15 @@ public class ListCompare implements Comparator<String> {
         char[] symL = left.toCharArray();
         char[] symR = right.toCharArray();
         int res = 0;
-        for (int i = 0; i < symL.length; i++) {
-            if (symR.length > i) {
-                res = Character.compare(symL[i], symR[i]);
-                if (res != 0) {
-                    break;
-                }
-            } else {
-                res = 1;
+        int minLenght = symL.length < symR.length ? symL.length : symR.length;
+        for (int i = 0; i < minLenght; i++) {
+            res = Character.compare(symL[i], symR[i]);
+            if (res != 0) {
                 break;
             }
         }
-        if (res == 0 && symL.length < symR.length) {
-            res = -1;
+        if (res == 0 && symL.length != symR.length) {
+            res = symL.length < symR.length ? -1 : 1;
         }
         return res;
     }
