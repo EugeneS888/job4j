@@ -39,6 +39,7 @@ public class UserTest {
                 .append("Алекс - сумма: 60000.0 ; счет: 444")
                 .append(System.lineSeparator())
                 .toString();
+        //System.out.println(bank.getUserFromPassport(user2.getPassport()).getName());
         bank.transferMoney(user1.getPassport(), acc3.getRequisites(), user3.getPassport(), acc4.getRequisites(), 5000D);
         List<Account> user1Acc = bank.getUserAccounts(user1.getPassport());
         for (Account li : user1Acc) {

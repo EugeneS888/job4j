@@ -5,6 +5,9 @@ public class Account {
     private double value;
     private long requisites;
 
+    public Account() {
+    }
+
     public Account(double value, long requisites) {
         this.value = value;
         this.requisites = requisites;
