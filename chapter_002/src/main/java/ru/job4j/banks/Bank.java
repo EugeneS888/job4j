@@ -7,7 +7,7 @@ public class Bank {
     Map<User, List<Account>> userAccounts = new HashMap<>();
 
     public void addUser(User user) {
-        this.userAccounts.put(user, new ArrayList<>());
+        this.userAccounts.putIfAbsent(user, new ArrayList<>());
     }
 
     public void deleteUser(User user) {
@@ -15,7 +15,7 @@ public class Bank {
     }
 
     public User getUserFromPassport(String passport) {
-        User user = new User();
+        User user = null;
         for (Map.Entry<User, List<Account>> us : this.userAccounts.entrySet()) {
             if (us.getKey().getPassport().equals(passport)) {
                 user = us.getKey();
@@ -37,28 +37,41 @@ public class Bank {
     }
 
     public void addAccountToUser(String passport, Account account) {
-        userAccounts.get(this.getUserFromPassport(passport)).add(account);
+        User user = this.getUserFromPassport(passport);
+        if (user != null) {
+            userAccounts.get(user).add(account);
+        }
     }
 
     public void deleteAccountFromUser(String passport, Account account) {
-        userAccounts.get(this.getUserFromPassport(passport)).remove(account);
+        User user = this.getUserFromPassport(passport);
+        if (user != null) {
+            userAccounts.get(user).remove(account);
+        }
     }
 
     public List<Account> getUserAccounts(String passport) {
-        return userAccounts.get(this.getUserFromPassport(passport));
+        User user = this.getUserFromPassport(passport);
+        List<Account> list = null;
+        if (user != null) {
+            list = userAccounts.get(user);
+        }
+        return list;
     }
 
     public boolean transferMoney(String srcPassport, long srcRequisite, String destPassport, long dstRequisite, double amount) {
         boolean res = false;
         User user1 = this.getUserFromPassport(srcPassport);
         User user2 = this.getUserFromPassport(destPassport);
-        Account acc1 = this.getAccountFromRequisite(user1, srcRequisite);
-        Account acc2 = this.getAccountFromRequisite(user2, dstRequisite);
-        if (userAccounts.get(user1).contains(acc1) && userAccounts.get(user2).contains(acc2)) {
-            if (acc1.getValue() >= amount) {
-                acc1.setValue(acc1.getValue() - amount);
-                acc2.setValue(acc2.getValue() + amount);
-                res = true;
+        if (user1 != null && user2 != null) {
+            Account acc1 = this.getAccountFromRequisite(user1, srcRequisite);
+            Account acc2 = this.getAccountFromRequisite(user2, dstRequisite);
+            if (userAccounts.get(user1).contains(acc1) && userAccounts.get(user2).contains(acc2)) {
+                if (acc1.getValue() >= amount) {
+                    acc1.setValue(acc1.getValue() - amount);
+                    acc2.setValue(acc2.getValue() + amount);
+                    res = true;
+                }
             }
         }
         return res;

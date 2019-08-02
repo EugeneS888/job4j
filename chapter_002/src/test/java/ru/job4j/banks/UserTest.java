@@ -42,12 +42,16 @@ public class UserTest {
         //System.out.println(bank.getUserFromPassport(user2.getPassport()).getName());
         bank.transferMoney(user1.getPassport(), acc3.getRequisites(), user3.getPassport(), acc4.getRequisites(), 5000D);
         List<Account> user1Acc = bank.getUserAccounts(user1.getPassport());
-        for (Account li : user1Acc) {
-            result.append(String.format("%s - сумма: %s ; счет: %s", user1.getName(), li.getValue(), li.getRequisites())).append(System.lineSeparator());
+        if (user1Acc != null) {
+            for (Account li : user1Acc) {
+                result.append(String.format("%s - сумма: %s ; счет: %s", user1.getName(), li.getValue(), li.getRequisites())).append(System.lineSeparator());
+            }
         }
         List<Account> user3Acc = bank.getUserAccounts(user3.getPassport());
-        for (Account li : user3Acc) {
-            result.append(String.format("%s - сумма: %s ; счет: %s", user3.getName(), li.getValue(), li.getRequisites())).append(System.lineSeparator());
+        if (user3Acc != null) {
+            for (Account li : user3Acc) {
+                result.append(String.format("%s - сумма: %s ; счет: %s", user3.getName(), li.getValue(), li.getRequisites())).append(System.lineSeparator());
+            }
         }
         System.out.println(result);
         assertThat(result.toString(), is(expect));
