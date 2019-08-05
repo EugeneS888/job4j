@@ -25,17 +25,6 @@ public class Bank {
         return user;
     }
 
-    public Account getAccountFromRequisite(User user, long srcRequisite) {
-        Account account = new Account();
-        for (Account acc : userAccounts.get(user)) {
-            if (acc.getRequisites() == srcRequisite) {
-                account = acc;
-                break;
-            }
-        }
-        return account;
-    }
-
     public void addAccountToUser(String passport, Account account) {
         User user = this.getUserFromPassport(passport);
         if (user != null) {
@@ -52,14 +41,49 @@ public class Bank {
 
     public List<Account> getUserAccounts(String passport) {
         User user = this.getUserFromPassport(passport);
-        List<Account> list = null;
+        List<Account> list = new ArrayList<>();
         if (user != null) {
             list = userAccounts.get(user);
         }
         return list;
     }
 
+    public Account getAccount(long rec, String pas) {
+        Account account = null;
+        List<Account> userAccounts = getUserAccounts(pas);
+        for (Account userAccount : userAccounts) {
+            if (rec == userAccount.getRequisites()) {
+                account = userAccount;
+            }
+        }
+        return account;
+    }
+
+    /*public Account getAccountFromRequisite(User user, long srcRequisite) {
+        Account account = new Account();
+        for (Account acc : userAccounts.get(user)) {
+            if (acc.getRequisites() == srcRequisite) {
+                account = acc;
+                break;
+            }
+        }
+        return account;
+    }*/
     public boolean transferMoney(String srcPassport, long srcRequisite, String destPassport, long dstRequisite, double amount) {
+        boolean res = false;
+        Account account = getAccount(srcRequisite, srcPassport);
+        Account account1 = getAccount(dstRequisite, destPassport);
+        if (account != null && account1 != null) {
+            if (account.getValue() >= amount) {
+                account.setValue(account.getValue() - amount);
+                account1.setValue(account1.getValue() + amount);
+            }
+            res = true;
+        }
+
+        return res;
+    }
+    /*public boolean transferMoney(String srcPassport, long srcRequisite, String destPassport, long dstRequisite, double amount) {
         boolean res = false;
         User user1 = this.getUserFromPassport(srcPassport);
         User user2 = this.getUserFromPassport(destPassport);
@@ -75,7 +99,7 @@ public class Bank {
             }
         }
         return res;
-    }
+    }*/
 
 
 }
