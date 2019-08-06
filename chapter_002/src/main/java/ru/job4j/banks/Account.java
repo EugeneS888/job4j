@@ -3,12 +3,12 @@ package ru.job4j.banks;
 public class Account {
 
     private double value;
-    private long requisites;
+    private String requisites;
 
     public Account() {
     }
 
-    public Account(double value, long requisites) {
+    public Account(double value, String requisites) {
         this.value = value;
         this.requisites = requisites;
     }
@@ -17,7 +17,7 @@ public class Account {
         return value;
     }
 
-    public long getRequisites() {
+    public String getRequisites() {
         return requisites;
     }
 

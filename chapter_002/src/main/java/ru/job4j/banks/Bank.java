@@ -48,11 +48,11 @@ public class Bank {
         return list;
     }
 
-    public Account getAccount(long rec, String pas) {
+    public Account getAccount(String rec, String pas) {
         Account account = null;
         List<Account> userAccounts = getUserAccounts(pas);
         for (Account userAccount : userAccounts) {
-            if (rec == userAccount.getRequisites()) {
+            if (rec.equals(userAccount.getRequisites())) {
                 account = userAccount;
             }
         }
@@ -69,7 +69,7 @@ public class Bank {
         }
         return account;
     }*/
-    public boolean transferMoney(String srcPassport, long srcRequisite, String destPassport, long dstRequisite, double amount) {
+    public boolean transferMoney(String srcPassport, String srcRequisite, String destPassport, String dstRequisite, double amount) {
         boolean res = false;
         Account account = getAccount(srcRequisite, srcPassport);
         Account account1 = getAccount(dstRequisite, destPassport);

@@ -16,10 +16,10 @@ public class UserTest {
         User user1 = new User("Иван", "78787787");
         User user2 = new User("Сергей", "16548449");
         User user3 = new User("Алекс", "68488894");
-        Account acc1 = new Account(10000d, 111L);
-        Account acc2 = new Account(15000d, 222L);
-        Account acc3 = new Account(30000d, 333L);
-        Account acc4 = new Account(55000d, 444L);
+        Account acc1 = new Account(10000d, "111");
+        Account acc2 = new Account(15000d, "222");
+        Account acc3 = new Account(30000d, "333");
+        Account acc4 = new Account(55000d, "444");
         Bank bank = new Bank();
         bank.addUser(user1);
         bank.addUser(user2);
