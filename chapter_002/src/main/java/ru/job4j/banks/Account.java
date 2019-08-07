@@ -21,7 +21,6 @@ public class Account {
         return requisites;
     }
 
-
     public void setValue(double value) {
         this.value = value;
     }
