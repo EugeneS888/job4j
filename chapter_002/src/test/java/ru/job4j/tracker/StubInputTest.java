@@ -37,6 +37,11 @@ public class StubInputTest {
         public void accept(String s) {
             stdout.println(s);
         }
+
+        public String toString() {
+            return out.toString();
+        }
+
     };
 
 
@@ -75,7 +80,7 @@ public class StubInputTest {
         );
 
     }
-/*
+
     @Test
     public void whenShowAllItemThenTrackerHasPrintValues() {
         Tracker tracker = new Tracker();
@@ -84,10 +89,10 @@ public class StubInputTest {
         //создаём StubInput с последовательностью действий(производим замену заявки)
         Input input = new StubInput(new String[]{"1", "y"});
         // создаём StartUI и вызываем метод init()
-        new StartUI(input, tracker).init();
+        new StartUI(input, tracker, output).init();
         // проверяем, что нулевой элемент массива в трекере содержит имя, введённое при эмуляции.
         assertThat(
-                this.out.toString(),
+                this.output.toString(),
                 is(
                         new StringBuilder()
                                 .append(this.menu)
@@ -113,12 +118,12 @@ public class StubInputTest {
         //создаём StubInput с последовательностью действий(производим замену заявки)
         Input input = new StubInput(new String[]{"5", item.getName(), "y"});
         // создаём StartUI и вызываем метод init()
-        new StartUI(input, tracker).init();
+        new StartUI(input, tracker, output).init();
         // проверяем, что нулевой элемент массива в трекере содержит имя, введённое при эмуляции.
         //assertThat(tracker.findByName(item.getName()), is(2));
         //assertThat(tracker.findByName(item.getName()), arrayContainingInAnyOrder(item));
         assertThat(
-                this.out.toString(),
+                this.output.toString(),
                 is(
                         new StringBuilder()
                                 .append(this.menu)
@@ -143,11 +148,11 @@ public class StubInputTest {
         //создаём StubInput с последовательностью действий(производим замену заявки)
         Input input = new StubInput(new String[]{"4", item.getId(), "y"});
         // создаём StartUI и вызываем метод init()
-        new StartUI(input, tracker).init();
+        new StartUI(input, tracker, output).init();
         // проверяем, что нулевой элемент массива в трекере содержит имя, введённое при эмуляции.
         //assertThat(tracker.findById(item.getId()).getId(), is(item.getId()));
         assertThat(
-                this.out.toString(),
+                this.output.toString(),
                 is(
                         new StringBuilder()
                                 .append(this.menu)
@@ -171,11 +176,11 @@ public class StubInputTest {
         //создаём StubInput с последовательностью действий(производим замену заявки)
         Input input = new StubInput(new String[]{"2", item.getId(), "test replace", "заменили заявку", "y"});
         // создаём StartUI и вызываем метод init()
-        new StartUI(input, tracker).init();
+        new StartUI(input, tracker, output).init();
         // проверяем, что нулевой элемент массива в трекере содержит имя, введённое при эмуляции.
         //assertThat(tracker.findById(item.getId()).getName(), is("test replace"));
         assertThat(
-                this.out.toString(),
+                this.output.toString(),
                 is(
                         new StringBuilder()
                                 .append(this.menu)
@@ -197,12 +202,12 @@ public class StubInputTest {
         //создаём StubInput с последовательностью действий(производим замену заявки)
         Input input = new StubInput(new String[]{"3", item.getId(), "y"});
         // создаём StartUI и вызываем метод init()
-        new StartUI(input, tracker).init();
+        new StartUI(input, tracker, output).init();
         String t = null;
         // проверяем, что нулевой элемент массива в трекере содержит имя, введённое при эмуляции.
         //assertThat(tracker.findById(item.getId()), is(t));
         assertThat(
-                this.out.toString(),
+                this.output.toString(),
                 is(
                         new StringBuilder()
                                 .append(this.menu)
@@ -214,5 +219,5 @@ public class StubInputTest {
                                 .toString()
                 )
         );
-    }*/
+    }
 }
