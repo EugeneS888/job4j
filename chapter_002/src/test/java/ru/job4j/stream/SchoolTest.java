@@ -6,7 +6,7 @@ import org.junit.Test;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
-import java.util.List;
+import java.util.*;
 
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
@@ -18,16 +18,16 @@ public class SchoolTest {
     private final ByteArrayOutputStream out = new ByteArrayOutputStream();
 
     List<Student> students = List.of(
-            new Student(100),
-            new Student(90),
-            new Student(80),
-            new Student(70),
-            new Student(60),
-            new Student(50),
-            new Student(40),
-            new Student(30),
-            new Student(20),
-            new Student(10)
+            new Student(100, "Иванов"),
+            new Student(90, "Петров"),
+            new Student(80, "Сидоров"),
+            new Student(70, "Пеле"),
+            new Student(60, "Месси"),
+            new Student(50, "Тихонов"),
+            new Student(40, "Титов"),
+            new Student(30, "Мостовой"),
+            new Student(20, "Каррера"),
+            new Student(10, "Карпин")
     );
 
     @Before
@@ -105,6 +105,30 @@ public class SchoolTest {
                                 .append(System.lineSeparator())
                                 .append("10")
                                 .append(System.lineSeparator())
+                                .toString()
+                )
+        );
+    }
+
+    @Test
+    public void whenListToMapThen() {
+        School school = new School();
+        Map<String, Student> st = school.collectMap(students);
+        st.forEach((k, v) -> System.out.println(v.getLastname()));
+        assertThat(
+                this.out.toString(),
+                is(
+                        new StringBuilder()
+                                .append("Каррера").append(System.lineSeparator())
+                                .append("Иванов").append(System.lineSeparator())
+                                .append("Сидоров").append(System.lineSeparator())
+                                .append("Титов").append(System.lineSeparator())
+                                .append("Петров").append(System.lineSeparator())
+                                .append("Тихонов").append(System.lineSeparator())
+                                .append("Карпин").append(System.lineSeparator())
+                                .append("Месси").append(System.lineSeparator())
+                                .append("Мостовой").append(System.lineSeparator())
+                                .append("Пеле").append(System.lineSeparator())
                                 .toString()
                 )
         );
