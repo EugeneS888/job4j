@@ -11,7 +11,7 @@ public class Matrix {
 
     public Set<Integer> getCommonElements() {
         Set<Integer> set = new HashSet<>();
-        Set<Integer> set1= new HashSet<>();
+        Set<Integer> set1 = new HashSet<>();
         for (List<Integer> matx : matrix) {
             for (Integer m : matx) {
                 if (!set1.add(m)) {
