@@ -1,6 +1,7 @@
 package ru.job4j.stream;
 
 import org.junit.After;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -114,24 +115,24 @@ public class SchoolTest {
     public void whenListToMapThen() {
         School school = new School();
         Map<String, Student> st = school.collectMap(students);
+        Map<String, Student> st1 = new HashMap<String, Student>();
+        st1.put("Иванов", new Student(100, "Иванов"));
+        st1.put("Петров", new Student(90, "Петров"));
+        st1.put("Сидоров", new Student(80, "Сидоров"));
+        st1.put("Пеле", new Student(70, "Пеле"));
+        st1.put("Месси", new Student(60, "Месси"));
+        st1.put("Тихонов", new Student(50, "Тихонов"));
+        st1.put("Титов", new Student(40, "Титов"));
+        st1.put("Мостовой", new Student(30, "Мостовой"));
+        st1.put("Каррера", new Student(20, "Каррера"));
+        st1.put("Карпин", new Student(10, "Карпин"));
         st.forEach((k, v) -> System.out.println(v.getLastname()));
-        assertThat(
-                this.out.toString(),
-                is(
-                        new StringBuilder()
-                                .append("Каррера").append(System.lineSeparator())
-                                .append("Иванов").append(System.lineSeparator())
-                                .append("Сидоров").append(System.lineSeparator())
-                                .append("Титов").append(System.lineSeparator())
-                                .append("Петров").append(System.lineSeparator())
-                                .append("Тихонов").append(System.lineSeparator())
-                                .append("Карпин").append(System.lineSeparator())
-                                .append("Месси").append(System.lineSeparator())
-                                .append("Мостовой").append(System.lineSeparator())
-                                .append("Пеле").append(System.lineSeparator())
-                                .toString()
-                )
-        );
+
+        assertThat(st, is(st1));
     }
+
+    /*private static boolean compareMaps(Map<String, Object> map1, Map<String, Object> map2) {
+            return map1.entrySet().containsAll(map2.entrySet()) && map2.entrySet().containsAll(map1.entrySet());
+        }*/
 
 }
