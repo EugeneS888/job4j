@@ -3,11 +3,12 @@ package ru.job4j.condition;
 import java.util.*;
 
 public class Matrix {
-    private List<List<Integer>> matrix = List.of(
-            List.of(1, 2, 3),
-            List.of(2, 3, 4),
-            List.of(2, 3)
-    );
+
+    private List<List<Integer>> matrix;
+
+    public void setMatrix(List<List<Integer>> matrix) {
+        this.matrix = matrix;
+    }
 
     public Set<Integer> getCommonElements() {
         Set<Integer> set = new HashSet<>();

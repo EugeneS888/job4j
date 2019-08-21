@@ -31,6 +31,8 @@ public class SortTest {
     @Test
     public void whenSortAscending() {
         Sort sort = new Sort();
+        String[] departments = new String[]{"K2\\SK1\\SSK1", "K2\\SK1\\SSK2", "K1\\SK1", "K1\\SK2", "K1\\SK1\\SSK1", "K1\\SK1\\SSK2"};
+        sort.setDepartments(departments);
         sort.checkDepartments();
         sort.sortAscending();
         assertThat(
@@ -65,6 +67,8 @@ public class SortTest {
     @Test
     public void whenSortDescending() {
         Sort sort = new Sort();
+        String[] departments = new String[]{"K2\\SK1\\SSK1", "K2\\SK1\\SSK2", "K1\\SK1", "K1\\SK2", "K1\\SK1\\SSK1", "K1\\SK1\\SSK2"};
+        sort.setDepartments(departments);
         sort.checkDepartments();
         sort.sortDescending();
         assertThat(
