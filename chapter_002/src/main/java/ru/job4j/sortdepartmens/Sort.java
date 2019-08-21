@@ -4,7 +4,6 @@ import java.util.*;
 
 public class Sort {
     private List<String> list = new ArrayList<String>();
-    //private String[] departments = new String[]{"K1\\SK1", "K1", "K2", "K1\\SK2", "K2\\SK1", "K1\\SK1\\SSK1", "K1\\SK1\\SSK2", "K2\\SK1\\SSK1", "K2\\SK1\\SSK2"};
     private String[] departments = new String[]{"K1\\SK1", "K1\\SK2", "K1\\SK1\\SSK1", "K1\\SK1\\SSK2", "K2", "K2\\SK1\\SSK1", "K2\\SK1\\SSK2"};
 
     Comparator<String> compareAscending = new Comparator<String>() {
@@ -51,12 +50,5 @@ public class Sort {
             }
         }
         list.addAll(deps);
-    }
-
-    public static void main(String[] args) {
-        Sort sort = new Sort();
-        sort.checkDepartments();
-        sort.sortAscending();
-        sort.sortDescending();
     }
 }

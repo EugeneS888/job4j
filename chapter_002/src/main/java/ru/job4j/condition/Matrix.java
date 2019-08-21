@@ -21,11 +21,4 @@ public class Matrix {
         }
         return set;
     }
-
-    public static void main(String[] args) {
-        Matrix m = new Matrix();
-        for (Integer list : m.getCommonElements()) {
-            System.out.println(list);
-        }
-    }
 }
